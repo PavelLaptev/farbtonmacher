@@ -3,7 +3,7 @@ import Head from 'next/head'
 
 import { ColorBlock } from '@/components'
 
-import styles from '@/styles/styles.module.scss'
+import styles from './styles.module.scss'
 
 
 export default function Home() {
@@ -30,6 +30,10 @@ export default function Home() {
         </section>
 
         <aside className={styles.sidebar}>
+          <section className={styles.sidebarControls}>
+          </section>
+          <section className={styles.sidebarLinks}>
+          </section>
         </aside>
 
       </main>

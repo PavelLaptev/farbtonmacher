@@ -1,0 +1,41 @@
+$controls-height: 380px;
+
+.wrapper {
+  display: flex;
+  min-height: 100vh;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.colorsPreview {
+  flex: 1;
+  background-color: rgba(255, 255, 0, 0.1);
+}
+
+.controls {
+  height: $controls-height;
+  background-color: rgba(255, 0, 0, 0.1);
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  width: 120px;
+}
+
+.sidebarLinks {
+  display: flex;
+  flex-direction: column;
+  height: $controls-height;
+  background-color: rgba(0, 255, 0, 0.1);
+}
+
+.sidebarControls {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
