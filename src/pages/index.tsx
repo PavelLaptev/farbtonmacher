@@ -1,13 +1,16 @@
 import { useState } from 'react'
 import Head from 'next/head'
 
-import { ColorBlock } from '@/components'
+import { MainColorBlock, ShadesBlock } from '@/components'
 
 import styles from './styles.module.scss'
 
 
 export default function Home() {
-  const [mainColor, setMainColor] = useState('#000000')
+  const [mainColor, setMainColor] = useState('#C2A7A7')
+  const [shadesAmount, setShadesAmount] = useState(2)
+  // const [lightShades, setLightShades] = useState(null as string[] | null)
+  // const [darkShades, setDarkShades] = useState(null as string[] | null)
 
   return (
     <>
@@ -22,11 +25,12 @@ export default function Home() {
 
         <section className={styles.main}>
           <section className={styles.colorsPreview}>
-            <ColorBlock color={mainColor} />
+            <ShadesBlock color={mainColor} shadesAmount={shadesAmount} />
+            <MainColorBlock color={mainColor} shadesAmount={shadesAmount} onChange={(e) => setMainColor(e.target.value)} />
+            <ShadesBlock color={mainColor} shadesAmount={shadesAmount} />
           </section>
 
-          <section className={styles.controls}>
-          </section>
+
         </section>
 
         <aside className={styles.sidebar}>

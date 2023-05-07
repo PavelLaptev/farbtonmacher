@@ -1,0 +1,15 @@
+.shadesWrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.shades {
+  display: flex;
+  flex: 1;
+}
+
+.controls {
+  height: var(--bottom-side-height);
+  background-color: rgba(255, 0, 0, 0.1);
+}

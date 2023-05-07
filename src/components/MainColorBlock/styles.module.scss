@@ -1,0 +1,14 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-width: 240px;
+}
+
+.mainColor {
+  flex: 1;
+}
+
+.controls {
+  height: var(--bottom-side-height);
+  background-color: rgba(255, 0, 0, 0.1);
+}

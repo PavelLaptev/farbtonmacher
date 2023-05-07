@@ -1,4 +1,6 @@
 :root {
+  --bottom-side-height: 380px;
+
   --color-background-light: #d9d9d9;
   --color-background-dark: #353535;
 }
