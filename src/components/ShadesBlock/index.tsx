@@ -2,24 +2,46 @@ import { useState, useEffect } from 'react'
 import ColorBlock from '../ColorBlock'
 import styles from './styles.module.scss'
 
-import { generateColorShades } from '@/utils'
+import { RangeInput } from '@/components'
+import { generateColorShades, interpolateTo100 } from '@/utils'
+
 
 interface Props {
-  color: string
-  shadesAmount: number
+  steps: number
+  mainColor: string
+  direction: "lighten" | "darken"
 }
+
+
 
 const ShadesBlock: React.FC<Props> = (props) => {
   const [shades, setShades] = useState([] as string[])
 
+  const generateShadeIndexName = (index: number) => {
+    const totalShades = props.steps * 2 + 1
+
+
+    if (props.direction === 'lighten') {
+      const shadeIndex = index + props.steps + 1
+      const percentage = interpolateTo100(totalShades, shadeIndex)
+      return `${percentage}`
+    }
+
+    else {
+      const shadeIndex = index + 1
+      const percentage = interpolateTo100(totalShades, shadeIndex)
+      return `${percentage}`
+    }
+  }
 
   useEffect(() => {
-    const shades = generateColorShades(props.color, props.shadesAmount, "lighten", -0.3)
+    setShades(generateColorShades({
+      color: props.mainColor,
+      steps: props.steps,
+      direction: props.direction
+    }) as string[])
 
-    console.log(shades)
-    setShades(shades)
-
-  }, [props.color, props.shadesAmount])
+  }, [props])
 
 
   return (
@@ -27,18 +49,16 @@ const ShadesBlock: React.FC<Props> = (props) => {
       <section className={styles.shades}>
         {
           shades.map((shade, index) => (
-            <ColorBlock key={index} color={shade} />
+            <ColorBlock key={index} color={shade} name={generateShadeIndexName(index)} />
           ))
         }
       </section>
+
       <section className={styles.controls}>
+        <RangeInput id='shades-range-input' />
       </section>
     </section>
   )
-}
-
-ShadesBlock.defaultProps = {
-  color: '#000000',
 }
 
 export default ShadesBlock

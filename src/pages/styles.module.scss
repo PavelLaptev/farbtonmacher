@@ -13,22 +13,3 @@
   display: flex;
   flex: 1;
 }
-
-.sidebar {
-  display: flex;
-  flex-direction: column;
-  width: 120px;
-}
-
-.sidebarLinks {
-  display: flex;
-  flex-direction: column;
-  height: var(--bottom-side-height);
-  background-color: rgba(0, 255, 0, 0.1);
-}
-
-.sidebarControls {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-}

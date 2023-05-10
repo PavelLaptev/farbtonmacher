@@ -1,16 +1,20 @@
 import { useState } from 'react'
 import Head from 'next/head'
+import { generateColorShades } from '@/utils'
 
-import { MainColorBlock, ShadesBlock } from '@/components'
+import { MainColorBlock, ShadesBlock, Sidebar } from '@/components'
 
 import styles from './styles.module.scss'
 
 
 export default function Home() {
   const [mainColor, setMainColor] = useState('#C2A7A7')
-  const [shadesAmount, setShadesAmount] = useState(2)
-  // const [lightShades, setLightShades] = useState(null as string[] | null)
-  // const [darkShades, setDarkShades] = useState(null as string[] | null)
+  const [steps, setSteps] = useState(6)
+
+  const updateMainColor = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const color = e.target.value
+    setMainColor(color)
+  }
 
   return (
     <>
@@ -25,21 +29,19 @@ export default function Home() {
 
         <section className={styles.main}>
           <section className={styles.colorsPreview}>
-            <ShadesBlock color={mainColor} shadesAmount={shadesAmount} />
-            <MainColorBlock color={mainColor} shadesAmount={shadesAmount} onChange={(e) => setMainColor(e.target.value)} />
-            <ShadesBlock color={mainColor} shadesAmount={shadesAmount} />
+            <ShadesBlock mainColor={mainColor} steps={steps} direction='darken' />
+            <MainColorBlock color={mainColor} shadesAmount={steps} onChange={updateMainColor} />
+            <ShadesBlock mainColor={mainColor} steps={steps} direction='lighten' />
           </section>
 
 
         </section>
 
-        <aside className={styles.sidebar}>
-          <section className={styles.sidebarControls}>
-          </section>
-          <section className={styles.sidebarLinks}>
-          </section>
-        </aside>
-
+        <Sidebar steps={steps} onPlusClick={() => setSteps(steps + 1)} onMinusClick={() => {
+          if (steps > 1) {
+            setSteps(steps - 1)
+          }
+        }} />
       </main>
     </>
   )

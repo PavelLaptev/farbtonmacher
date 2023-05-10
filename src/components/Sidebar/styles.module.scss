@@ -1,0 +1,98 @@
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  width: 120px;
+}
+
+.sidebarLinks {
+  display: flex;
+  flex-direction: column;
+  height: var(--bottom-side-height);
+  // background-color: rgba(0, 255, 0, 0.1);
+}
+
+.sidebarControls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  flex: 1;
+}
+
+.shadesAmountButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+@mixin shadesAmountButtonsMixin {
+  position: relative;
+  cursor: pointer;
+  width: 44px;
+  height: 58px;
+  border: 2px solid var(--color-primary);
+  border-radius: 40px;
+  background: none;
+  outline: none;
+  transition: border-color 0.1s ease-in-out;
+
+  &:hover {
+    border-color: var(--color-primary-light);
+
+    &::before,
+    &::after {
+      background-color: var(--color-primary-light);
+    }
+  }
+
+  &:focus-within {
+    border-color: var(--color-accesebility);
+
+    &::before,
+    &::after {
+      background-color: var(--color-accesebility);
+    }
+  }
+
+  &:disabled {
+    pointer-events: none;
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+}
+
+.plusButton {
+  @include shadesAmountButtonsMixin;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 24px;
+    height: 2px;
+    background-color: var(--color-primary);
+    transform: translate(-50%, -50%);
+  }
+
+  &::after {
+    transform: translate(-50%, -50%) rotate(90deg);
+    width: 30px;
+  }
+}
+
+.minusButton {
+  @include shadesAmountButtonsMixin;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 24px;
+    height: 2px;
+    background-color: var(--color-primary);
+    transform: translate(-50%, -50%);
+  }
+}
