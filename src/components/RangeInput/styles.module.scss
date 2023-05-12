@@ -1,3 +1,111 @@
+$thumb-size: 14px;
+
 .wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.manualInputWrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.manualInput {
+  border-radius: 4px;
+  padding: 6px;
+  width: 40px;
+
+  background-color: transparent;
+  border: 2px solid transparent;
+
+  color: var(--color-primary);
+  text-align: right;
+  font-size: 14px;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus,
+  &:hover {
+    // border: 2px solid var(--color-primary);
+    background-color: var(--color-primary-dark);
+  }
+
+  // remove arrows
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+}
+
+.rangeWrapper {
   position: relative;
+
+  input[type="range"] {
+    width: 100%;
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0);
+
+    &::-webkit-slider-runnable-track {
+      // height: 0;
+      background-color: rgba(0, 0, 0, 0);
+    }
+
+    &::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: $thumb-size;
+      height: $thumb-size;
+      background-color: var(--color-primary);
+      transform: translateY(10px);
+      border-radius: 8px;
+      transition: background-color 0.1s ease-in-out;
+
+      &:hover {
+        background-color: var(--color-primary-light);
+      }
+    }
+  }
+}
+
+.track {
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: $thumb-size / 2;
+  width: calc(100% - $thumb-size);
+  height: 4px;
+  background-color: var(--color-primary-semidark);
+}
+
+.progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 4px;
+  background-color: var(--color-primary-light);
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: -12px;
+    right: -2px;
+    width: 4px;
+    height: 4px;
+    border-radius: 8px;
+    background-color: var(--color-primary);
+  }
+}
+
+.label {
+  user-select: none;
+  opacity: 0.8;
+  color: var(--color-primary);
+  font-size: 14px;
+  font-weight: 500;
+  margin-left: $thumb-size / 2;
 }

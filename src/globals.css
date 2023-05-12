@@ -7,7 +7,8 @@
 
   --color-primary: #c2c2c2;
   --color-primary-light: #eeeeee;
-  --color-primary-dark: #494949;
+  --color-primary-semidark: #818181;
+  --color-primary-dark: #3e3e3e;
   --color-background-dark: #434343;
 }
 
@@ -15,6 +16,11 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+}
+
+*::selection {
+  background-color: var(--color-primary-semidark);
+  color: var(--color-accesebility);
 }
 
 html,
