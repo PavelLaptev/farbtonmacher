@@ -1,40 +1,121 @@
 export const generateColorShades = ({
   color,
   steps,
-  direction
+  direction,
+  shadeBrightness,
+  shadeSaturation,
+  shadeContrast,
+  shadeTemperature
 }: {
   color: string;
   steps: number;
   direction: "lighten" | "darken";
+  shadeBrightness: number;
+  shadeSaturation: number;
+  shadeContrast: number;
+  shadeTemperature: number;
 }) => {
   const [h, s, l] = hexToHsl(color);
-
-  // console.log(stepSize);
+  // console.log("shadeHue", shadeHue);
 
   const shades = Array.from({ length: steps }, (_, i) => {
+    // Calculate the adjusted saturation for the current shade
+    const adjustSaturation = () => {
+      const saturation = s + -s * ((shadeSaturation * (-i + 1)) / steps);
+
+      if (saturation > 100) {
+        return 100;
+      }
+
+      if (saturation < 0) {
+        return 0;
+      }
+
+      return saturation;
+    };
+
+    const adjustHue = () => {
+      const adjustedHue = h + shadeTemperature;
+
+      console.log("adjustedHue", adjustedHue);
+
+      return adjustedHue;
+    };
+
+    const contrast = generateExponentialArray(steps, shadeContrast);
+
+    // console.log(contrast);
+
     if (direction === "lighten") {
-      const stepSize = (100 - l) / steps;
-      const newLightness = l + stepSize * ++i;
+      const stepSize = l / (steps * (steps / 2));
+      const stepSizeWithSmoothness = stepSize + stepSize * shadeBrightness;
 
-      // console.log("light", stepSize);
+      const newLightness = l + stepSizeWithSmoothness * ++i;
 
-      return hslToHex(h, s, newLightness);
+      return hslToHex(h, adjustSaturation(), cutLightness(newLightness));
     }
 
     if (direction === "darken") {
-      const stepSize = l / steps;
-      const newLightness = l - stepSize * ++i;
+      const stepSize = ((l - l / steps) / steps) * contrast[i];
 
-      // console.log("dark", stepSize);
+      // console.log(contrast);
+      const stepSizeWithSmoothness = stepSize + stepSize * shadeBrightness;
 
-      return hslToHex(h, s, newLightness);
+      const newLightness = l - stepSizeWithSmoothness * ++i;
+
+      return hslToHex(
+        adjustHue(),
+        adjustSaturation(),
+        cutLightness(newLightness)
+      );
     }
   });
 
-  // remove black and white from shades
-  shades.pop();
-
   return direction === "lighten" ? shades : shades.reverse();
+};
+
+const generateExponentialArray = (
+  totalAmount: number,
+  exponentialRatio: number
+) => {
+  const values = [];
+
+  for (let i = 0; i < totalAmount; i++) {
+    let exponentialVariant;
+
+    if (exponentialRatio === 0) {
+      exponentialVariant = 1; // Set all values to 1 when exponentialRatio is 0
+    } else if (exponentialRatio > 0) {
+      const normalizedIndex = i / (totalAmount - 1); // Normalize index to the range of 0 to 1
+      exponentialVariant = Math.pow(normalizedIndex, exponentialRatio);
+    } else {
+      const normalizedIndex = i / (totalAmount - 1); // Normalize index to the range of 0 to 1
+      exponentialVariant = Math.pow(
+        1 + normalizedIndex / 2,
+        Math.abs(exponentialRatio)
+      );
+    }
+
+    values.push(exponentialVariant);
+  }
+
+  if (exponentialRatio < 0) {
+    values.reverse();
+  }
+
+  return values;
+};
+
+const cutLightness = (number: number) => {
+  if (number > 100) {
+    return 100;
+  }
+
+  if (number < 0) {
+    return 0;
+  }
+
+  return number;
 };
 
 export function hexToHsl(hex: string): [number, number, number] {

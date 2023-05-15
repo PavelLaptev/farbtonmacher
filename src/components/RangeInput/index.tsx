@@ -10,16 +10,47 @@ interface Props {
   min: number;
   value: number;
   step: number;
+  hueMode?: boolean;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const RangeInput: React.FC<Props> = (props) => {
-  const [value, setValue] = useState(props.value);
+  const [rangeInputValue, setRangeInputValue] = useState(props.value as number);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(Number(e.target.value));
+    setRangeInputValue(Number(e.target.value));
     props.onChange(e);
   };
+
+  const handleManualInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // restrict by min and max
+    if (Number(e.target.value) < props.min) {
+      setRangeInputValue(props.min);
+      props.onChange(e);
+      return;
+    }
+
+    if (Number(e.target.value) > props.max) {
+      setRangeInputValue(props.max);
+      props.onChange(e);
+      return;
+    }
+
+    // maximum 1 decimal places
+    if (e.target.value.includes(".")) {
+      const decimalPlaces = e.target.value.split(".")[1].length;
+      if (decimalPlaces > 1) {
+        return;
+      }
+    }
+
+    setRangeInputValue(Number(e.target.value));
+    props.onChange(e);
+  };
+
+  useEffect(() => {
+    setRangeInputValue(props.value);
+  }, [props.value]);
 
   return (
     <section className={`${styles.wrapper} ${props.className}`}>
@@ -27,12 +58,11 @@ const RangeInput: React.FC<Props> = (props) => {
         <span className={styles.label}>{props.label}</span>
         <input
           type="number"
+          min={props.min}
+          max={props.max}
           className={styles.manualInput}
-          value={value}
-          onChange={(e) => {
-            setValue(Number(e.target.value));
-            props.onChange(e);
-          }}
+          value={rangeInputValue}
+          onChange={handleManualInput}
         />
       </div>
       <label htmlFor={props.id} className={styles.rangeWrapper}>
@@ -40,7 +70,9 @@ const RangeInput: React.FC<Props> = (props) => {
           <div
             className={styles.progress}
             style={{
-              width: `${((value - props.min) / (props.max - props.min)) * 100}%`
+              width: `${
+                ((rangeInputValue - props.min) / (props.max - props.min)) * 100
+              }%`
             }}
           />
         </div>
@@ -52,7 +84,7 @@ const RangeInput: React.FC<Props> = (props) => {
           max={props.max}
           step={props.step}
           className={styles.rangeInput}
-          value={value}
+          value={rangeInputValue}
           onChange={handleChange}
         />
       </label>

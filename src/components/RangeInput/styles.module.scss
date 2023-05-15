@@ -3,7 +3,7 @@ $thumb-size: 14px;
 .wrapper {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 10px;
 }
 
 .manualInputWrapper {
@@ -13,8 +13,9 @@ $thumb-size: 14px;
 
 .manualInput {
   border-radius: 4px;
-  padding: 6px;
+  padding: 4px;
   width: 40px;
+  margin: 0;
 
   background-color: transparent;
   border: 2px solid transparent;
@@ -80,6 +81,20 @@ $thumb-size: 14px;
   width: calc(100% - $thumb-size);
   height: 4px;
   background-color: var(--color-primary-semidark);
+
+  // dot in the middle
+  &::after {
+    content: "";
+    position: absolute;
+    top: -12px;
+    right: 50%;
+    transform: translateX(50%);
+    width: 4px;
+    height: 4px;
+    border-radius: 8px;
+    background-color: var(--color-primary);
+    opacity: 0.5;
+  }
 }
 
 .progress {

@@ -1,20 +1,19 @@
-import { useState } from 'react'
-import Head from 'next/head'
-import { generateColorShades } from '@/utils'
+import { useState } from "react";
+import Head from "next/head";
+import { generateColorShades } from "@/utils";
 
-import { MainColorBlock, ShadesBlock, Sidebar } from '@/components'
+import { MainColorBlock, ShadesBlock, Sidebar } from "@/components";
 
-import styles from './styles.module.scss'
-
+import styles from "./styles.module.scss";
 
 export default function Home() {
-  const [mainColor, setMainColor] = useState('#C2A7A7')
-  const [steps, setSteps] = useState(6)
+  const [mainColor, setMainColor] = useState("#36EAA9");
+  const [steps, setSteps] = useState(5);
 
   const updateMainColor = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const color = e.target.value
-    setMainColor(color)
-  }
+    const color = e.target.value;
+    setMainColor(color);
+  };
 
   return (
     <>
@@ -26,23 +25,36 @@ export default function Home() {
       </Head>
 
       <main className={styles.wrapper}>
-
         <section className={styles.main}>
           <section className={styles.colorsPreview}>
-            <ShadesBlock mainColor={mainColor} steps={steps} direction='darken' />
-            <MainColorBlock color={mainColor} shadesAmount={steps} onChange={updateMainColor} />
-            <ShadesBlock mainColor={mainColor} steps={steps} direction='lighten' />
+            <ShadesBlock
+              mainColor={mainColor}
+              steps={steps}
+              direction="darken"
+            />
+            <MainColorBlock
+              color={mainColor}
+              shadesAmount={steps}
+              onChange={updateMainColor}
+            />
+            <ShadesBlock
+              mainColor={mainColor}
+              steps={steps}
+              direction="lighten"
+            />
           </section>
-
-
         </section>
 
-        <Sidebar steps={steps} onPlusClick={() => setSteps(steps + 1)} onMinusClick={() => {
-          if (steps > 1) {
-            setSteps(steps - 1)
-          }
-        }} />
+        <Sidebar
+          steps={steps}
+          onPlusClick={() => setSteps(steps + 1)}
+          onMinusClick={() => {
+            if (steps > 1) {
+              setSteps(steps - 1);
+            }
+          }}
+        />
       </main>
     </>
-  )
+  );
 }
