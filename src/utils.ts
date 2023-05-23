@@ -35,9 +35,9 @@ export const generateColorShades = ({
     };
 
     const adjustHue = () => {
-      const adjustedHue = h + shadeTemperature;
+      const adjustedHue = h + shadeTemperature * i ** 2;
 
-      console.log("adjustedHue", adjustedHue);
+      // console.log("adjustedHue", adjustedHue);
 
       return adjustedHue;
     };
@@ -52,7 +52,11 @@ export const generateColorShades = ({
 
       const newLightness = l + stepSizeWithSmoothness * ++i;
 
-      return hslToHex(h, adjustSaturation(), cutLightness(newLightness));
+      return hslToHex(
+        adjustHue(),
+        adjustSaturation(),
+        cutLightness(newLightness)
+      );
     }
 
     if (direction === "darken") {

@@ -107,8 +107,8 @@ const ShadesBlock: React.FC<Props> = (props) => {
           className={styles.rangeInput}
           min={-1}
           max={1}
-          step={0.1}
-          value={shadeSaturation}
+          step={0.01}
+          value={shadeTemperature}
           onChange={(e) => {
             setShadeTemperature(Number(e.target.value));
           }}
