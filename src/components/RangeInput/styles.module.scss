@@ -73,13 +73,15 @@ $thumb-size: 14px;
   }
 }
 
+$track-height: 2px;
+
 .track {
   pointer-events: none;
   position: absolute;
   top: 0;
   left: $thumb-size / 2;
   width: calc(100% - $thumb-size);
-  height: 4px;
+  height: $track-height;
   background-color: var(--color-primary-semidark);
 
   // dot in the middle
@@ -101,7 +103,7 @@ $thumb-size: 14px;
   position: absolute;
   top: 0;
   left: 0;
-  height: 4px;
+  height: $track-height;
   background-color: var(--color-primary-light);
 
   &::after {

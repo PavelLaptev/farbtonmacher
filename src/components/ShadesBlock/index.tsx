@@ -15,7 +15,6 @@ const ShadesBlock: React.FC<Props> = (props) => {
   const [shades, setShades] = useState([] as string[]);
   const [shadeBrightness, setShadeBrightness] = useState(0);
   const [shadeSaturation, setShadeSaturation] = useState(0);
-  const [shadeContrast, setShadeContrast] = useState(0);
   const [shadeTemperature, setShadeTemperature] = useState(0);
 
   const generateShadeIndexName = (index: number) => {
@@ -26,7 +25,7 @@ const ShadesBlock: React.FC<Props> = (props) => {
       const percentage = interpolateTo100(totalShades, shadeIndex);
       return `${percentage}`;
     } else {
-      const shadeIndex = index + 1;
+      const shadeIndex = index;
       const percentage = interpolateTo100(totalShades, shadeIndex);
       return `${percentage}`;
     }
@@ -40,17 +39,10 @@ const ShadesBlock: React.FC<Props> = (props) => {
         direction: props.direction,
         shadeBrightness,
         shadeSaturation,
-        shadeContrast,
         shadeTemperature
       }) as string[]
     );
-  }, [
-    props,
-    shadeBrightness,
-    shadeSaturation,
-    shadeContrast,
-    shadeTemperature
-  ]);
+  }, [props, shadeBrightness, shadeSaturation, shadeTemperature]);
 
   return (
     <section className={styles.shadesWrapper}>
@@ -65,18 +57,6 @@ const ShadesBlock: React.FC<Props> = (props) => {
       </section>
 
       <section className={styles.controls}>
-        <RangeInput
-          id={`contrast-${props.direction}`}
-          label="Contrast"
-          className={styles.rangeInput}
-          min={-1}
-          max={1}
-          step={0.1}
-          value={shadeContrast}
-          onChange={(e) => {
-            setShadeContrast(Number(e.target.value));
-          }}
-        />
         <RangeInput
           id={`smoothness-${props.direction}`}
           label="Brightness"
@@ -107,7 +87,7 @@ const ShadesBlock: React.FC<Props> = (props) => {
           className={styles.rangeInput}
           min={-1}
           max={1}
-          step={0.01}
+          step={0.1}
           value={shadeTemperature}
           onChange={(e) => {
             setShadeTemperature(Number(e.target.value));

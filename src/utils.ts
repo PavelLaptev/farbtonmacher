@@ -4,7 +4,6 @@ export const generateColorShades = ({
   direction,
   shadeBrightness,
   shadeSaturation,
-  shadeContrast,
   shadeTemperature
 }: {
   color: string;
@@ -12,7 +11,6 @@ export const generateColorShades = ({
   direction: "lighten" | "darken";
   shadeBrightness: number;
   shadeSaturation: number;
-  shadeContrast: number;
   shadeTemperature: number;
 }) => {
   const [h, s, l] = hexToHsl(color);
@@ -36,13 +34,8 @@ export const generateColorShades = ({
 
     const adjustHue = () => {
       const adjustedHue = h + shadeTemperature * i ** 2;
-
-      // console.log("adjustedHue", adjustedHue);
-
       return adjustedHue;
     };
-
-    const contrast = generateExponentialArray(steps, shadeContrast);
 
     // console.log(contrast);
 
@@ -60,7 +53,7 @@ export const generateColorShades = ({
     }
 
     if (direction === "darken") {
-      const stepSize = ((l - l / steps) / steps) * contrast[i];
+      const stepSize = (l - l / steps) / steps;
 
       // console.log(contrast);
       const stepSizeWithSmoothness = stepSize + stepSize * shadeBrightness;
@@ -76,38 +69,6 @@ export const generateColorShades = ({
   });
 
   return direction === "lighten" ? shades : shades.reverse();
-};
-
-const generateExponentialArray = (
-  totalAmount: number,
-  exponentialRatio: number
-) => {
-  const values = [];
-
-  for (let i = 0; i < totalAmount; i++) {
-    let exponentialVariant;
-
-    if (exponentialRatio === 0) {
-      exponentialVariant = 1; // Set all values to 1 when exponentialRatio is 0
-    } else if (exponentialRatio > 0) {
-      const normalizedIndex = i / (totalAmount - 1); // Normalize index to the range of 0 to 1
-      exponentialVariant = Math.pow(normalizedIndex, exponentialRatio);
-    } else {
-      const normalizedIndex = i / (totalAmount - 1); // Normalize index to the range of 0 to 1
-      exponentialVariant = Math.pow(
-        1 + normalizedIndex / 2,
-        Math.abs(exponentialRatio)
-      );
-    }
-
-    values.push(exponentialVariant);
-  }
-
-  if (exponentialRatio < 0) {
-    values.reverse();
-  }
-
-  return values;
 };
 
 const cutLightness = (number: number) => {
