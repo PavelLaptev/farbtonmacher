@@ -40,7 +40,8 @@ export const generateColorShades = ({
     // console.log(contrast);
 
     if (direction === "lighten") {
-      const stepSize = l / (steps * (steps / 2));
+      const stepSize = (l - l / steps - 1) / steps - 1;
+
       const stepSizeWithSmoothness = stepSize + stepSize * shadeBrightness;
 
       const newLightness = l + stepSizeWithSmoothness * ++i;
@@ -172,10 +173,33 @@ export function roundToNearestMultiple(num: number) {
   }
 }
 
-export function interpolateTo100(totalItems: number, itemIndex: number) {
-  // Calculate the interpolation value
-  const interpolationValue = (itemIndex / (totalItems - 1)) * 100;
-  const roundedInterpolationValue = roundToNearestMultiple(interpolationValue);
+export function generateArrayOfNumbers(
+  start: number,
+  end: number,
+  amount: number
+) {
+  if (start > end) {
+    [start, end] = [end, start];
+  }
 
-  return roundedInterpolationValue;
+  const numbers = [];
+  const step = Math.round((end - start) / (amount - 1));
+
+  for (let i = 0; i < amount; i++) {
+    const number = Math.round((start + step * i) / 5) * 5;
+    numbers.push(number);
+  }
+
+  return numbers;
 }
+
+export const generateShadeNames = (
+  direction: "lighten" | "darken",
+  steps: number
+) => {
+  if (direction === "lighten") {
+    return generateArrayOfNumbers(90, 60, steps).map((num) => num.toString());
+  } else {
+    return generateArrayOfNumbers(10, 40, steps).map((num) => num.toString());
+  }
+};

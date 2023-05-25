@@ -3,11 +3,12 @@ import ColorBlock from "../ColorBlock";
 import styles from "./styles.module.scss";
 
 import { RangeInput } from "@/components";
-import { generateColorShades, interpolateTo100 } from "@/utils";
+import { generateColorShades } from "@/utils";
 
 interface Props {
   steps: number;
   mainColor: string;
+  colorNames: string[];
   direction: "lighten" | "darken";
 }
 
@@ -16,20 +17,6 @@ const ShadesBlock: React.FC<Props> = (props) => {
   const [shadeBrightness, setShadeBrightness] = useState(0);
   const [shadeSaturation, setShadeSaturation] = useState(0);
   const [shadeTemperature, setShadeTemperature] = useState(0);
-
-  const generateShadeIndexName = (index: number) => {
-    const totalShades = props.steps * 2 + 1;
-
-    if (props.direction === "lighten") {
-      const shadeIndex = index + props.steps;
-      const percentage = interpolateTo100(totalShades, shadeIndex);
-      return `${percentage}`;
-    } else {
-      const shadeIndex = index;
-      const percentage = interpolateTo100(totalShades, shadeIndex);
-      return `${percentage}`;
-    }
-  };
 
   useEffect(() => {
     setShades(
@@ -51,7 +38,7 @@ const ShadesBlock: React.FC<Props> = (props) => {
           <ColorBlock
             key={index}
             color={shade}
-            name={generateShadeIndexName(index)}
+            name={props.colorNames[index]}
           />
         ))}
       </section>

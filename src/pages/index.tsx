@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Head from "next/head";
-import { generateColorShades } from "@/utils";
+import { generateShadeNames } from "@/utils";
 
 import { MainColorBlock, ShadesBlock, Sidebar } from "@/components";
 
@@ -31,6 +31,7 @@ export default function Home() {
               mainColor={mainColor}
               steps={steps}
               direction="darken"
+              colorNames={generateShadeNames("darken", steps)}
             />
             <MainColorBlock
               color={mainColor}
@@ -41,6 +42,7 @@ export default function Home() {
               mainColor={mainColor}
               steps={steps}
               direction="lighten"
+              colorNames={generateShadeNames("lighten", steps)}
             />
           </section>
         </section>
