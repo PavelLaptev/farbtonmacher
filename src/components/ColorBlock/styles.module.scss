@@ -4,10 +4,27 @@
   flex-direction: column;
   justify-content: flex-end;
   padding: 20px;
+  min-width: 120px;
   // border: 1px solid black;
 }
 
 .title {
   display: flex;
   flex-direction: column;
+  gap: 4px;
+
+  // transform: translateY(20px);
+  color: var(--color-primary);
+}
+
+.score {
+  font-size: 14px;
+  font-weight: 600;
+  opacity: 0.8;
+}
+
+.number {
+  opacity: 0.6;
+  font-weight: 500;
+  font-size: 12px;
 }

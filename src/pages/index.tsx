@@ -8,7 +8,7 @@ import styles from "./styles.module.scss";
 
 export default function Home() {
   const [mainColor, setMainColor] = useState("#36EAA9");
-  const [steps, setSteps] = useState(5);
+  const [steps, setSteps] = useState(4);
 
   const updateMainColor = (e: React.ChangeEvent<HTMLInputElement>) => {
     const color = e.target.value;

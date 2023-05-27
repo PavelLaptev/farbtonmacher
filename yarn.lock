@@ -1001,6 +1001,11 @@ flatted@^3.1.0:
   resolved "https://registry.yarnpkg.com/flatted/-/flatted-3.2.7.tgz#609f39207cb614b89d0765b477cb2d437fbf9787"
   integrity sha512-5nqDSxl8nn5BSNxyR3n4I6eDmbolI6WT+QqR547RwxQapgjQBmtktdP+HTBb/a/zLsbzERTONyUB5pefh5TtjQ==
 
+font-color-contrast@^11.1.0:
+  version "11.1.0"
+  resolved "https://registry.yarnpkg.com/font-color-contrast/-/font-color-contrast-11.1.0.tgz#f147720c1fd6e5e43be7aea86d247b1cdc46508b"
+  integrity sha512-PxpFaesCSsDwaciw7MF6B2thUkH7skqZlz4BzUnvapR6+Es2877q7ru/tqfsITuaraPz+TGfsOfdtU4D0qjqEw==
+
 for-each@^0.3.3:
   version "0.3.3"
   resolved "https://registry.yarnpkg.com/for-each/-/for-each-0.3.3.tgz#69b447e88a0a5d32c3e7084f3f1710034b21376e"
@@ -2225,6 +2230,11 @@ uri-js@^4.2.2:
   integrity sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==
   dependencies:
     punycode "^2.1.0"
+
+wcag-color@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/wcag-color/-/wcag-color-1.1.1.tgz#a11454ac39dbfec41fa03fd7af5465728e99255f"
+  integrity sha512-KRez+YYOx7AGoQ6+Izu3YjNsISYAC+F/g0hJ+eNaaA8taeLbEkptkgA46SM9ioXxz/2KTjJpQqAhOwAQVwaTEQ==
 
 which-boxed-primitive@^1.0.2:
   version "1.0.2"
