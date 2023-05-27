@@ -28,18 +28,16 @@ const Sidebar: React.FC<Props> = (props) => {
   return (
     <aside className={styles.sidebar}>
       <section className={styles.sidebarControls}>
-        <div className={styles.shadesAmountButtons}>
-          <button
-            className={styles.plusButton}
-            onClick={props.onPlusClick}
-            disabled={isPlusDisabled}
-          />
-          <button
-            className={styles.minusButton}
-            onClick={props.onMinusClick}
-            disabled={isMinusDisabled}
-          />
-        </div>
+        <button
+          className={styles.plusButton}
+          onClick={props.onPlusClick}
+          disabled={isPlusDisabled}
+        />
+        <button
+          className={styles.minusButton}
+          onClick={props.onMinusClick}
+          disabled={isMinusDisabled}
+        />
       </section>
 
       <section className={styles.sidebarLinks}></section>

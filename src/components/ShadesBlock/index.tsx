@@ -2,85 +2,25 @@ import { useState, useEffect } from "react";
 import ColorBlock from "../ColorBlock";
 import styles from "./styles.module.scss";
 
-import { RangeInput } from "@/components";
-import { generateColorShades } from "@/utils";
-
 interface Props {
-  steps: number;
-  mainColor: string;
-  colorNames: string[];
-  direction: "lighten" | "darken";
+  shades: string[];
+  names: string[];
 }
 
 const ShadesBlock: React.FC<Props> = (props) => {
   const [shades, setShades] = useState([] as string[]);
-  const [shadeBrightness, setShadeBrightness] = useState(0);
-  const [shadeSaturation, setShadeSaturation] = useState(0);
-  const [shadeTemperature, setShadeTemperature] = useState(0);
+  const [names, setNames] = useState([] as string[]);
 
   useEffect(() => {
-    setShades(
-      generateColorShades({
-        color: props.mainColor,
-        steps: props.steps,
-        direction: props.direction,
-        shadeBrightness,
-        shadeSaturation,
-        shadeTemperature
-      }) as string[]
-    );
-  }, [props, shadeBrightness, shadeSaturation, shadeTemperature]);
+    setShades(props.shades);
+    setNames(props.names);
+  }, [props]);
 
   return (
-    <section className={styles.shadesWrapper}>
-      <section className={styles.shades}>
-        {shades.map((shade, index) => (
-          <ColorBlock
-            key={index}
-            color={shade}
-            name={props.colorNames[index]}
-          />
-        ))}
-      </section>
-
-      <section className={styles.controls}>
-        <RangeInput
-          id={`smoothness-${props.direction}`}
-          label="Brightness"
-          className={styles.rangeInput}
-          min={-1}
-          max={1}
-          step={0.1}
-          value={shadeBrightness}
-          onChange={(e) => {
-            setShadeBrightness(Number(e.target.value));
-          }}
-        />
-        <RangeInput
-          id={`saturation-${props.direction}`}
-          label="Saturation"
-          className={styles.rangeInput}
-          min={-1}
-          max={1}
-          step={0.1}
-          value={shadeSaturation}
-          onChange={(e) => {
-            setShadeSaturation(Number(e.target.value));
-          }}
-        />
-        <RangeInput
-          id={`temperature-${props.direction}`}
-          label="Temperature"
-          className={styles.rangeInput}
-          min={-1}
-          max={1}
-          step={0.1}
-          value={shadeTemperature}
-          onChange={(e) => {
-            setShadeTemperature(Number(e.target.value));
-          }}
-        />
-      </section>
+    <section className={styles.shades}>
+      {shades.map((shade, index) => (
+        <ColorBlock key={index} color={shade} name={names[index]} />
+      ))}
     </section>
   );
 };

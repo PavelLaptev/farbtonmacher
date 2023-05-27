@@ -2,13 +2,15 @@ import { useState } from "react";
 import Head from "next/head";
 import { generateShadeNames } from "@/utils";
 
-import { MainColorBlock, ShadesBlock, Sidebar } from "@/components";
+import { ColorBlock, ShadesBlock, ControlsBlock, Sidebar } from "@/components";
 
 import styles from "./styles.module.scss";
 
 export default function Home() {
   const [mainColor, setMainColor] = useState("#36EAA9");
   const [steps, setSteps] = useState(4);
+  const [lightShades, setLightShades] = useState<string[]>([]);
+  const [darkShades, setDarkShades] = useState<string[]>([]);
 
   const updateMainColor = (e: React.ChangeEvent<HTMLInputElement>) => {
     const color = e.target.value;
@@ -28,21 +30,57 @@ export default function Home() {
         <section className={styles.main}>
           <section className={styles.colorsPreview}>
             <ShadesBlock
-              mainColor={mainColor}
-              steps={steps}
-              direction="darken"
-              colorNames={generateShadeNames("darken", steps)}
+              shades={darkShades}
+              names={generateShadeNames("darken", steps)}
             />
-            <MainColorBlock
+            <ColorBlock
+              className={styles.mainColorShade}
               color={mainColor}
-              shadesAmount={steps}
-              onChange={updateMainColor}
+              name="50"
             />
             <ShadesBlock
-              mainColor={mainColor}
+              shades={lightShades}
+              names={generateShadeNames("lighten", steps)}
+            />
+          </section>
+
+          <section className={styles.controls}>
+            <ControlsBlock
               steps={steps}
+              onChange={(shades) => setDarkShades(shades)}
+              mainColor={mainColor}
+              direction="darken"
+            />
+            <section className={styles.colorControlWrap}>
+              <div className={styles.mainColorControl}>
+                <label
+                  htmlFor="main-color-input"
+                  className={styles.colorControl}
+                >
+                  <span className={styles.hexCode}>
+                    {mainColor.toUpperCase()}
+                  </span>
+                  <div
+                    className={styles.colorPreview}
+                    style={{
+                      backgroundColor: mainColor
+                    }}
+                  />
+                  <input
+                    id="main-color-input"
+                    type="color"
+                    value={mainColor}
+                    onChange={updateMainColor}
+                  />
+                </label>
+              </div>
+            </section>
+
+            <ControlsBlock
+              steps={steps}
+              onChange={(shades) => setLightShades(shades)}
+              mainColor={mainColor}
               direction="lighten"
-              colorNames={generateShadeNames("lighten", steps)}
             />
           </section>
         </section>

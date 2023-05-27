@@ -27,7 +27,6 @@ html,
 body {
   font-family: "Inter", sans-serif;
   max-width: 100vw;
-  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;

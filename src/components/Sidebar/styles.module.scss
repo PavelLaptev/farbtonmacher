@@ -1,7 +1,15 @@
+$desktop: 1020px;
+
 .sidebar {
   display: flex;
   flex-direction: column;
   width: 120px;
+  padding: 20px;
+
+  @media (max-width: $desktop) {
+    width: 100%;
+    flex-direction: row;
+  }
 }
 
 .sidebarLinks {
@@ -9,20 +17,23 @@
   flex-direction: column;
   height: var(--bottom-side-height);
   // background-color: rgba(0, 255, 0, 0.1);
+
+  @media (max-width: $desktop) {
+    height: auto;
+  }
 }
 
 .sidebarControls {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 10px;
   justify-content: flex-end;
   flex: 1;
-}
 
-.shadesAmountButtons {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  @media (max-width: $desktop) {
+    flex-direction: row;
+  }
 }
 
 @mixin shadesAmountButtonsMixin {
@@ -59,6 +70,11 @@
     cursor: not-allowed;
     opacity: 0.5;
   }
+
+  @media (max-width: $desktop) {
+    width: 58px;
+    height: 40px;
+  }
 }
 
 .plusButton {
@@ -79,6 +95,13 @@
   &::after {
     transform: translate(-50%, -50%) rotate(90deg);
     width: 30px;
+  }
+
+  @media (max-width: $desktop) {
+    &::after {
+      width: 20px;
+      height: 2px;
+    }
   }
 }
 

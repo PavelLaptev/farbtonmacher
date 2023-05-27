@@ -13,7 +13,7 @@ interface Props {
 }
 
 const ColorBlock: React.FC<Props> = (props) => {
-  const [fontColor, setFontColor] = React.useState("#000000");
+  const [fontColor, setFontColor] = React.useState("var(--color-accesebility)");
   const [contrastScore, setContrastScore] = React.useState("");
 
   React.useEffect(() => {
@@ -28,8 +28,6 @@ const ColorBlock: React.FC<Props> = (props) => {
     const contrastScore = score(fontColor, props.color);
 
     setContrastScore(contrastScore);
-
-    console.log(contrastScore);
   }, [props.color]);
 
   return (

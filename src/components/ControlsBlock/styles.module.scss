@@ -1,10 +1,6 @@
-.shades {
-  display: flex;
-  flex: 1;
-}
-
 .controls {
   display: flex;
+  flex: 1;
   justify-content: center;
   align-items: center;
   height: var(--bottom-side-height);
@@ -17,5 +13,5 @@
 
 .rangeInput {
   width: 100%;
-  max-width: 600px;
+  // max-width: 600px;
 }

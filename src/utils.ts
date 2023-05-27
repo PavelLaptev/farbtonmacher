@@ -57,7 +57,7 @@ export const generateColorShades = ({
       const stepSize = (l - l / steps) / steps;
 
       // console.log(contrast);
-      const stepSizeWithSmoothness = stepSize + stepSize * shadeBrightness;
+      const stepSizeWithSmoothness = stepSize + stepSize * -shadeBrightness;
 
       const newLightness = l - stepSizeWithSmoothness * ++i;
 
