@@ -1,4 +1,7 @@
+$desktop: 1020px;
+
 .colorBlock {
+  position: relative;
   cursor: pointer;
   flex: 1;
   display: flex;
@@ -7,7 +10,29 @@
   padding: 20px;
   min-width: 120px;
   scroll-snap-align: start;
+  transition: all 0.1s ease-in-out;
   // border: 1px solid black;
+
+  @media (min-width: $desktop) {
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 0;
+      background-color: var(--color-accesebility);
+      transition: all 0.1s ease-in-out;
+    }
+
+    &:hover {
+      transform: translateY(-8px);
+      &::after {
+        height: 10px;
+        bottom: -10px;
+      }
+    }
+  }
 }
 
 .title {
