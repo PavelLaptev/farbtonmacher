@@ -1,3 +1,5 @@
+$desktop: 1020px;
+
 .controls {
   display: flex;
   flex: 1;
@@ -7,8 +9,14 @@
   flex-direction: column;
   gap: 16px;
   padding: 0 40px;
+  min-width: 300px;
+  scroll-snap-align: center;
   // transition: background-color 0.1s ease-in-out;
   // background-color: rgba(255, 0, 0, 0.1);
+
+  @media (max-width: $desktop) {
+    padding: 0 20px;
+  }
 }
 
 .rangeInput {

@@ -33,6 +33,12 @@ $desktop: 1020px;
   display: flex;
   align-items: center;
   width: 100%;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 ///////////////////////////
@@ -44,6 +50,7 @@ $desktop: 1020px;
   display: flex;
   align-items: center;
   justify-content: center;
+  scroll-snap-align: center;
 }
 
 .colorControl {
@@ -56,6 +63,7 @@ $desktop: 1020px;
   transition: background-color 0.1s ease-in-out;
 
   input {
+    cursor: pointer;
     position: absolute;
     top: 0;
     left: 0;
@@ -72,6 +80,10 @@ $desktop: 1020px;
 .mainColorShade,
 .colorControlWrap {
   max-width: 18%;
+
+  @media (max-width: $desktop) {
+    min-width: 200px;
+  }
 }
 
 .hexCode {

@@ -4,23 +4,37 @@ $desktop: 1020px;
   display: flex;
   flex-direction: column;
   width: 120px;
-  padding: 20px;
+  padding: 20px 20px 40px;
 
   @media (max-width: $desktop) {
+    justify-content: space-between;
     width: 100%;
     flex-direction: row;
+    padding: 20px;
   }
 }
 
 .sidebarLinks {
   display: flex;
   flex-direction: column;
-  height: var(--bottom-side-height);
-  // background-color: rgba(0, 255, 0, 0.1);
+  justify-content: flex-end;
+  align-items: center;
+  // margin-bottom: 20px;
+  height: calc(var(--bottom-side-height) - 40px);
+  gap: 10px;
 
   @media (max-width: $desktop) {
     height: auto;
+    flex-direction: row;
   }
+}
+
+.socialLink {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 32px;
+  height: 32px;
 }
 
 .sidebarControls {
@@ -33,6 +47,7 @@ $desktop: 1020px;
 
   @media (max-width: $desktop) {
     flex-direction: row;
+    justify-content: flex-start;
   }
 }
 

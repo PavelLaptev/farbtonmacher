@@ -1,4 +1,4 @@
-$thumb-size: 14px;
+$thumb-size: 16px;
 
 .wrapper {
   display: flex;
@@ -62,7 +62,7 @@ $thumb-size: 14px;
       width: $thumb-size;
       height: $thumb-size;
       background-color: var(--color-primary);
-      transform: translateY(10px);
+      transform: translateY(-7px);
       border-radius: 8px;
       transition: background-color 0.1s ease-in-out;
 
@@ -88,7 +88,7 @@ $track-height: 2px;
   &::after {
     content: "";
     position: absolute;
-    top: -12px;
+    top: -16px;
     right: 50%;
     transform: translateX(50%);
     width: 4px;
@@ -106,16 +106,16 @@ $track-height: 2px;
   height: $track-height;
   background-color: var(--color-primary-light);
 
-  &::after {
-    content: "";
-    position: absolute;
-    top: -12px;
-    right: -2px;
-    width: 4px;
-    height: 4px;
-    border-radius: 8px;
-    background-color: var(--color-primary);
-  }
+  // &::after {
+  //   content: "";
+  //   position: absolute;
+  //   top: -12px;
+  //   right: -2px;
+  //   width: 4px;
+  //   height: 4px;
+  //   border-radius: 8px;
+  //   background-color: var(--color-primary);
+  // }
 }
 
 .label {
