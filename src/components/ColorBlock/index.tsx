@@ -16,6 +16,7 @@ interface Props {
 interface ModalSectionrops {
   label: string;
   value: string;
+  fontColor: string;
   button: {
     label: string;
     onClick: () => void;
@@ -24,7 +25,14 @@ interface ModalSectionrops {
 
 const ModalSection: React.FC<ModalSectionrops> = (props) => {
   return (
-    <section className={styles.modalSection}>
+    <section
+      className={styles.modalSection}
+      style={
+        {
+          "--font-color": props.fontColor
+        } as React.CSSProperties
+      }
+    >
       <div className={styles.content}>
         <span>{props.label}</span>
         <h3>{props.value}</h3>
@@ -37,6 +45,7 @@ const ModalSection: React.FC<ModalSectionrops> = (props) => {
 };
 
 const ColorBlock: React.FC<Props> = (props) => {
+  const [initialFontColor, setInitialFontColor] = React.useState("#000000");
   const [fontColor, setFontColor] = React.useState("var(--color-accesebility)");
   const [contrastScore, setContrastScore] = React.useState("");
   const [isModalOpen, setIsModalOpen] = React.useState(false);
@@ -44,6 +53,7 @@ const ColorBlock: React.FC<Props> = (props) => {
   React.useEffect(() => {
     const fontColor = fontColorContrast(props.color);
 
+    setInitialFontColor(fontColor);
     setFontColor(
       fontColor === "#000000"
         ? "var(--color-background-dark)"
@@ -70,13 +80,15 @@ const ColorBlock: React.FC<Props> = (props) => {
           <ModalSection
             label="WCAG level"
             value={contrastScore}
+            fontColor={fontColor}
             button={{
               label: "Check",
               onClick: () => {
                 window.open(
-                  `https://contrast-ratio.com/#${fontColor.slice(
-                    1
-                  )}-on-${props.color.slice(1)}`
+                  `https://webaim.org/resources/contrastchecker/?fcolor=${initialFontColor.replace(
+                    "#",
+                    ""
+                  )}&bcolor=${props.color.replace("#", "")}`
                 );
               }
             }}
