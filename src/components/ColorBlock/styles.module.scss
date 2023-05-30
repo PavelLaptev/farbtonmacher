@@ -14,34 +14,17 @@ $desktop: 1020px;
   // border: 1px solid black;
 
   @media (min-width: $desktop) {
-    &::after {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 0;
-      background-color: var(--color-accesebility);
-      transition: all 0.1s ease-in-out;
-    }
-
     &:hover {
       transform: translateY(-8px);
-      &::after {
-        height: 10px;
-        bottom: -10px;
-      }
     }
   }
 }
 
-.title {
+.description {
   display: flex;
   flex-direction: column;
   gap: 4px;
-
-  // transform: translateY(20px);
-  color: var(--color-primary);
+  user-select: none;
 }
 
 .score {
@@ -54,4 +37,64 @@ $desktop: 1020px;
   opacity: 0.6;
   font-weight: 500;
   font-size: 12px;
+}
+
+///////////////////
+/// MODAL /////////
+///////////////////
+.modalContent {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  --base-color: var(--color-primary);
+}
+
+.modalSection {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modalSectionHR {
+  width: 100%;
+  height: 1px;
+  background: var(--base-color);
+  border: none;
+  opacity: 0.2;
+}
+
+.modalSectionContent {
+  display: flex;
+  flex-direction: column;
+
+  span {
+    font-size: 14px;
+    opacity: 0.5;
+    color: var(--base-color);
+  }
+
+  h3 {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--base-color);
+    text-transform: uppercase;
+  }
+}
+
+.modalSectionButton {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  background: none;
+  color: var(--base-color);
+  border: 2px solid var(--base-color);
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+
+  &:hover {
+    background: var(--base-color);
+    color: var(--contrast-color);
+  }
 }

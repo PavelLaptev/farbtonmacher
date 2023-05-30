@@ -5,6 +5,7 @@ import fontColorContrast from "font-color-contrast";
 import { score } from "wcag-color";
 
 import styles from "./styles.module.scss";
+import { init } from "next/dist/compiled/@vercel/og/satori";
 
 interface Props {
   className?: string;
@@ -16,7 +17,6 @@ interface Props {
 interface ModalSectionrops {
   label: string;
   value: string;
-  fontColor: string;
   button: {
     label: string;
     onClick: () => void;
@@ -25,19 +25,15 @@ interface ModalSectionrops {
 
 const ModalSection: React.FC<ModalSectionrops> = (props) => {
   return (
-    <section
-      className={styles.modalSection}
-      style={
-        {
-          "--font-color": props.fontColor
-        } as React.CSSProperties
-      }
-    >
-      <div className={styles.content}>
+    <section className={styles.modalSection}>
+      <div className={styles.modalSectionContent}>
         <span>{props.label}</span>
         <h3>{props.value}</h3>
       </div>
-      <button className={styles.button} onClick={props.button.onClick}>
+      <button
+        className={styles.modalSectionButton}
+        onClick={props.button.onClick}
+      >
         {props.button.label}
       </button>
     </section>
@@ -49,6 +45,7 @@ const ColorBlock: React.FC<Props> = (props) => {
   const [fontColor, setFontColor] = React.useState("var(--color-accesebility)");
   const [contrastScore, setContrastScore] = React.useState("");
   const [isModalOpen, setIsModalOpen] = React.useState(false);
+  const [isCopied, setIsCopied] = React.useState(false);
 
   React.useEffect(() => {
     const fontColor = fontColorContrast(props.color);
@@ -65,6 +62,16 @@ const ColorBlock: React.FC<Props> = (props) => {
     setContrastScore(contrastScore);
   }, [props.color]);
 
+  React.useEffect(() => {
+    const timeOut = setTimeout(() => {
+      setIsCopied(false);
+    }, 1000);
+
+    return () => {
+      clearTimeout(timeOut);
+    };
+  }, [isCopied]);
+
   const handleColorClick = () => {
     setIsModalOpen(true);
   };
@@ -76,11 +83,19 @@ const ColorBlock: React.FC<Props> = (props) => {
         isOpen={isModalOpen}
         onOutsideClick={() => setIsModalOpen(false)}
       >
-        <div>
+        <div
+          className={styles.modalContent}
+          style={
+            {
+              "--base-color": initialFontColor,
+              "--contrast-color":
+                initialFontColor === "#000000" ? "#ffffff" : "#000000"
+            } as React.CSSProperties
+          }
+        >
           <ModalSection
             label="WCAG level"
             value={contrastScore}
-            fontColor={fontColor}
             button={{
               label: "Check",
               onClick: () => {
@@ -93,6 +108,18 @@ const ColorBlock: React.FC<Props> = (props) => {
               }
             }}
           />
+          <hr className={styles.modalSectionHR} />
+          <ModalSection
+            label="Hex code"
+            value={props.color}
+            button={{
+              label: isCopied ? "Copied!" : "Copy",
+              onClick: () => {
+                navigator.clipboard.writeText(props.color);
+                setIsCopied(true);
+              }
+            }}
+          />
         </div>
       </Modal>
       <div
@@ -100,7 +127,7 @@ const ColorBlock: React.FC<Props> = (props) => {
         style={{ backgroundColor: props.color, ...props.style }}
         onClick={handleColorClick}
       >
-        <div className={styles.title}>
+        <div className={styles.description}>
           <span
             className={styles.score}
             style={{

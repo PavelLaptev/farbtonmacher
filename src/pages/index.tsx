@@ -28,12 +28,7 @@ export default function Home() {
 
       <main className={styles.wrapper}>
         <section className={styles.main}>
-          <section
-            className={styles.colorsPreview}
-            style={{
-              backgroundColor: mainColor
-            }}
-          >
+          <section className={styles.colorsPreview}>
             <ShadesBlock
               shades={darkShades}
               names={generateShadeNames("darken", steps)}
