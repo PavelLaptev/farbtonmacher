@@ -22,7 +22,7 @@ export default function Home() {
   const defaultSteps = 4;
   const defaultMainColor = "#36EAA9";
 
-  const [mainColor, setMainColor] = useState("");
+  const [mainColor, setMainColor] = useState(defaultMainColor);
   const [steps, setSteps] = useState(defaultSteps);
   const [lightShades, setLightShades] = useState<string[]>([]);
   const [darkShades, setDarkShades] = useState<string[]>([]);
@@ -42,14 +42,14 @@ export default function Home() {
     const color = e.target.value;
     setMainColor(color);
 
-    const params = new URLSearchParams(window.location.search);
-    params.set("mainColor", color);
+    // const params = new URLSearchParams(window.location.search);
+    // params.set("mainColor", color);
 
-    window.history.replaceState(
-      {},
-      "",
-      `${window.location.pathname}?${params.toString()}`
-    );
+    // window.history.replaceState(
+    //   {},
+    //   "",
+    //   `${window.location.pathname}?${params.toString()}`
+    // );
   };
 
   const setURLParams = (params: URLSearchParams) => {
@@ -95,13 +95,13 @@ export default function Home() {
   //   }
   // }, []);
 
-  if (mainColor === "") {
-    return (
-      <div className={styles.loadingWrapper}>
-        <LoadSpinner />
-      </div>
-    );
-  }
+  // if (mainColor === "") {
+  //   return (
+  //     <div className={styles.loadingWrapper}>
+  //       <LoadSpinner />
+  //     </div>
+  //   );
+  // }
 
   return (
     <>
