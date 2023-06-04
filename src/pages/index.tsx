@@ -103,10 +103,10 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Farbtonemacher | Shades generator</title>
+        <title>Farbtonmacher | Shades generator</title>
         <meta
           name="description"
-          content="Farbtonemacher is a tool that helps you to generate color shades
+          content="Farbtonmacher is a tool that helps you to generate color shades
           based on your main color. You can adjust the brightness, saturation
           and temperature of the shades. You can also share your color
           configuration with others by copying the URL."
@@ -123,10 +123,10 @@ export default function Home() {
           href="/farbtonmacher/apple-touch-icon.png"
         />
         <meta name="theme-color" content="#4a4a4a"></meta>
-        <meta property="og:title" content="Farbtonemacher | Shades generator" />
+        <meta property="og:title" content="Farbtonmacher | Shades generator" />
         <meta
           property="og:description"
-          content="Farbtonemacher is a tool that helps you to generate color shades
+          content="Farbtonmacher is a tool that helps you to generate color shades
           based on your main color. You can adjust the brightness, saturation
           and temperature of the shades. You can also share your color
           configuration with others by copying the URL."
