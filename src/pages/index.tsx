@@ -58,42 +58,42 @@ export default function Home() {
     window.history.replaceState({}, "", urlConfig);
   };
 
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const colorParam = params.get("mainColor");
+  // useEffect(() => {
+  //   const params = new URLSearchParams(window.location.search);
+  //   const colorParam = params.get("mainColor");
 
-    if (!colorParam) {
-      // set default params
-      params.set("mainColor", defaultMainColor);
-      setMainColor(defaultMainColor);
+  //   if (!colorParam) {
+  //     // set default params
+  //     params.set("mainColor", defaultMainColor);
+  //     setMainColor(defaultMainColor);
 
-      params.set("steps", defaultSteps.toString());
-      params.set("dsb", "0");
-      params.set("dss", "0");
-      params.set("dst", "0");
-      params.set("lsb", "0");
-      params.set("lss", "0");
-      params.set("lst", "0");
+  //     params.set("steps", defaultSteps.toString());
+  //     params.set("dsb", "0");
+  //     params.set("dss", "0");
+  //     params.set("dst", "0");
+  //     params.set("lsb", "0");
+  //     params.set("lss", "0");
+  //     params.set("lst", "0");
 
-      router.push({
-        pathname: "/",
-        query: params.toString()
-      } as any);
-    } else {
-      setMainColor(colorParam);
-      setSteps(parseFloat(params.get("steps") || defaultSteps.toString()));
-      setDarkShadeParams({
-        shadeBrightness: parseFloat(params.get("dsb") || "0"),
-        shadeSaturation: parseFloat(params.get("dss") || "0"),
-        shadeTemperature: parseFloat(params.get("dst") || "0")
-      });
-      setLightShadeParams({
-        shadeBrightness: parseFloat(params.get("lsb") || "0"),
-        shadeSaturation: parseFloat(params.get("lss") || "0"),
-        shadeTemperature: parseFloat(params.get("lst") || "0")
-      });
-    }
-  }, []);
+  //     router.push({
+  //       pathname: "/",
+  //       query: params.toString()
+  //     } as any);
+  //   } else {
+  //     setMainColor(colorParam);
+  //     setSteps(parseFloat(params.get("steps") || defaultSteps.toString()));
+  //     setDarkShadeParams({
+  //       shadeBrightness: parseFloat(params.get("dsb") || "0"),
+  //       shadeSaturation: parseFloat(params.get("dss") || "0"),
+  //       shadeTemperature: parseFloat(params.get("dst") || "0")
+  //     });
+  //     setLightShadeParams({
+  //       shadeBrightness: parseFloat(params.get("lsb") || "0"),
+  //       shadeSaturation: parseFloat(params.get("lss") || "0"),
+  //       shadeTemperature: parseFloat(params.get("lst") || "0")
+  //     });
+  //   }
+  // }, []);
 
   if (mainColor === "") {
     return (
@@ -149,12 +149,12 @@ export default function Home() {
                 setDarkShades(props.shades);
                 setDarkShadeParams(props.params);
 
-                const params = new URLSearchParams(window.location.search);
-                params.set("dsb", props.params.shadeBrightness.toString());
-                params.set("dss", props.params.shadeSaturation.toString());
-                params.set("dst", props.params.shadeTemperature.toString());
+                // const params = new URLSearchParams(window.location.search);
+                // params.set("dsb", props.params.shadeBrightness.toString());
+                // params.set("dss", props.params.shadeSaturation.toString());
+                // params.set("dst", props.params.shadeTemperature.toString());
 
-                setURLParams(params);
+                // setURLParams(params);
               }}
               shadeParams={darkShadeParams}
               mainColor={mainColor}
@@ -191,12 +191,12 @@ export default function Home() {
                 setLightShades(shades.shades);
                 setLightShadeParams(shades.params);
 
-                const params = new URLSearchParams(window.location.search);
-                params.set("lsb", shades.params.shadeBrightness.toString());
-                params.set("lss", shades.params.shadeSaturation.toString());
-                params.set("lst", shades.params.shadeTemperature.toString());
+                // const params = new URLSearchParams(window.location.search);
+                // params.set("lsb", shades.params.shadeBrightness.toString());
+                // params.set("lss", shades.params.shadeSaturation.toString());
+                // params.set("lst", shades.params.shadeTemperature.toString());
 
-                setURLParams(params);
+                // setURLParams(params);
               }}
               shadeParams={lightShadeParams}
               mainColor={mainColor}
@@ -208,10 +208,9 @@ export default function Home() {
         <Sidebar
           steps={steps}
           onStepsChange={() => {
-            const params = new URLSearchParams(window.location.search);
-            params.set("steps", steps.toString());
-
-            setURLParams(params);
+            // const params = new URLSearchParams(window.location.search);
+            // params.set("steps", steps.toString());
+            // setURLParams(params);
           }}
           onPlusClick={() => {
             setSteps(steps + 1);
