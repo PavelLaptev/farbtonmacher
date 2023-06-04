@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import ColorBlock from "../ColorBlock";
 import styles from "./styles.module.scss";
 
 import { RangeInput } from "@/components";
@@ -9,13 +8,31 @@ interface Props {
   steps: number;
   mainColor: string;
   direction: "lighten" | "darken";
-  onChange?: (shades: string[]) => void;
+  shadeParams: {
+    shadeBrightness: number;
+    shadeSaturation: number;
+    shadeTemperature: number;
+  };
+  onChange?: (props: {
+    shades: string[];
+    params: {
+      shadeBrightness: number;
+      shadeSaturation: number;
+      shadeTemperature: number;
+    };
+  }) => void;
 }
 
 const ShadesBlock: React.FC<Props> = (props) => {
-  const [shadeBrightness, setShadeBrightness] = useState(0);
-  const [shadeSaturation, setShadeSaturation] = useState(0);
-  const [shadeTemperature, setShadeTemperature] = useState(0);
+  const [shadeBrightness, setShadeBrightness] = useState(
+    props.shadeParams.shadeBrightness
+  );
+  const [shadeSaturation, setShadeSaturation] = useState(
+    props.shadeParams.shadeSaturation
+  );
+  const [shadeTemperature, setShadeTemperature] = useState(
+    props.shadeParams.shadeTemperature
+  );
 
   useEffect(() => {
     const shades = generateColorShades({
@@ -27,7 +44,15 @@ const ShadesBlock: React.FC<Props> = (props) => {
       shadeTemperature
     }) as string[];
 
-    props.onChange && props.onChange(shades);
+    props.onChange &&
+      props.onChange({
+        shades,
+        params: {
+          shadeBrightness,
+          shadeSaturation,
+          shadeTemperature
+        }
+      });
   }, [
     props.steps,
     props.direction,

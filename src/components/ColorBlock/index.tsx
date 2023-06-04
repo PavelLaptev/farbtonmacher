@@ -1,11 +1,11 @@
 import React from "react";
 
 import Modal from "../Modal";
+import Button from "../Button";
 import fontColorContrast from "font-color-contrast";
 import { score } from "wcag-color";
 
 import styles from "./styles.module.scss";
-import { init } from "next/dist/compiled/@vercel/og/satori";
 
 interface Props {
   className?: string;
@@ -20,6 +20,7 @@ interface ModalSectionrops {
   button: {
     label: string;
     onClick: () => void;
+    baseColor: string;
   };
 }
 
@@ -30,12 +31,11 @@ const ModalSection: React.FC<ModalSectionrops> = (props) => {
         <span>{props.label}</span>
         <h3>{props.value}</h3>
       </div>
-      <button
-        className={styles.modalSectionButton}
+      <Button
+        label={props.button.label}
+        baseColor={props.button.baseColor}
         onClick={props.button.onClick}
-      >
-        {props.button.label}
-      </button>
+      />
     </section>
   );
 };
@@ -65,7 +65,7 @@ const ColorBlock: React.FC<Props> = (props) => {
   React.useEffect(() => {
     const timeOut = setTimeout(() => {
       setIsCopied(false);
-    }, 1000);
+    }, 2000);
 
     return () => {
       clearTimeout(timeOut);
@@ -105,7 +105,8 @@ const ColorBlock: React.FC<Props> = (props) => {
                     ""
                   )}&bcolor=${props.color.replace("#", "")}`
                 );
-              }
+              },
+              baseColor: initialFontColor
             }}
           />
           <hr className={styles.modalSectionHR} />
@@ -117,7 +118,8 @@ const ColorBlock: React.FC<Props> = (props) => {
               onClick: () => {
                 navigator.clipboard.writeText(props.color);
                 setIsCopied(true);
-              }
+              },
+              baseColor: initialFontColor
             }}
           />
         </div>
