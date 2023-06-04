@@ -115,7 +115,19 @@ export default function Home() {
         <link rel="icon" href="/favicons/favicon.ico" sizes="any" />
         <link rel="icon" href="/favicons/favicon.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        <meta name="theme-color" content="#4a4a4a"></meta>o
+        <meta name="theme-color" content="#4a4a4a"></meta>
+        <meta property="og:title" content="Farbtonemacher | Shades generator" />
+        <meta
+          property="og:description"
+          content="Farbtonemacher is a tool that helps you to generate color shades
+          based on your main color. You can adjust the brightness, saturation
+          and temperature of the shades. You can also share your color
+          configuration with others by copying the URL."
+        />
+        <meta
+          property="og:image"
+          content={`http://localhost:3000/api/og?color=${mainColor}`}
+        />
       </Head>
 
       <main className={styles.wrapper}>
