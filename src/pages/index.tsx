@@ -129,119 +129,125 @@ export default function Home() {
     }
   }, []);
 
-  if (mainColor === "") {
-    return (
-      <>
-        <HeadContent />
-        <div className={styles.loadingWrapper}>
-          <LoadSpinner />
-        </div>
-      </>
-    );
-  }
+  // if (mainColor === "") {
+  //   return (
+  //     <>
+  //       <HeadContent />
+  //       <div className={styles.loadingWrapper}>
+  //         <LoadSpinner />
+  //       </div>
+  //     </>
+  //   );
+  // }
 
   return (
     <>
       <HeadContent />
-      <main className={styles.wrapper}>
-        <section className={styles.main}>
-          <section className={styles.colorsPreview}>
-            <ShadesBlock
-              shades={darkShades}
-              names={generateShadeNames("darken", steps)}
-            />
-            <ColorBlock
-              className={styles.mainColorShade}
-              color={mainColor}
-              name="50"
-            />
-            <ShadesBlock
-              shades={lightShades}
-              names={generateShadeNames("lighten", steps)}
-            />
-          </section>
-
-          <section className={styles.controls}>
-            <ControlsBlock
-              steps={steps}
-              onChange={(props) => {
-                setDarkShades(props.shades);
-                setDarkShadeParams(props.params);
-
-                const params = new URLSearchParams(window.location.search);
-                params.set("dsb", props.params.shadeBrightness.toString());
-                params.set("dss", props.params.shadeSaturation.toString());
-                params.set("dst", props.params.shadeTemperature.toString());
-
-                setURLParams(params);
-              }}
-              shadeParams={darkShadeParams}
-              mainColor={mainColor}
-              direction="darken"
-            />
-            <section className={styles.colorControlWrap}>
-              <div className={styles.mainColorControl}>
-                <label
-                  htmlFor="main-color-input"
-                  className={styles.colorControl}
-                >
-                  <span className={styles.hexCode}>
-                    {mainColor.toUpperCase()}
-                  </span>
-                  <div
-                    className={styles.colorPreview}
-                    style={{
-                      backgroundColor: mainColor
-                    }}
-                  />
-                  <input
-                    id="main-color-input"
-                    type="color"
-                    value={mainColor}
-                    onChange={updateMainColor}
-                  />
-                </label>
-              </div>
+      {mainColor === "" ? (
+        <div className={styles.loadingWrapper}>
+          <LoadSpinner />
+        </div>
+      ) : (
+        <main className={styles.wrapper}>
+          <section className={styles.main}>
+            <section className={styles.colorsPreview}>
+              <ShadesBlock
+                shades={darkShades}
+                names={generateShadeNames("darken", steps)}
+              />
+              <ColorBlock
+                className={styles.mainColorShade}
+                color={mainColor}
+                name="50"
+              />
+              <ShadesBlock
+                shades={lightShades}
+                names={generateShadeNames("lighten", steps)}
+              />
             </section>
 
-            <ControlsBlock
-              steps={steps}
-              onChange={(shades) => {
-                setLightShades(shades.shades);
-                setLightShadeParams(shades.params);
+            <section className={styles.controls}>
+              <ControlsBlock
+                steps={steps}
+                onChange={(props) => {
+                  setDarkShades(props.shades);
+                  setDarkShadeParams(props.params);
 
-                const params = new URLSearchParams(window.location.search);
-                params.set("lsb", shades.params.shadeBrightness.toString());
-                params.set("lss", shades.params.shadeSaturation.toString());
-                params.set("lst", shades.params.shadeTemperature.toString());
+                  const params = new URLSearchParams(window.location.search);
+                  params.set("dsb", props.params.shadeBrightness.toString());
+                  params.set("dss", props.params.shadeSaturation.toString());
+                  params.set("dst", props.params.shadeTemperature.toString());
 
-                setURLParams(params);
-              }}
-              shadeParams={lightShadeParams}
-              mainColor={mainColor}
-              direction="lighten"
-            />
+                  setURLParams(params);
+                }}
+                shadeParams={darkShadeParams}
+                mainColor={mainColor}
+                direction="darken"
+              />
+              <section className={styles.colorControlWrap}>
+                <div className={styles.mainColorControl}>
+                  <label
+                    htmlFor="main-color-input"
+                    className={styles.colorControl}
+                  >
+                    <span className={styles.hexCode}>
+                      {mainColor.toUpperCase()}
+                    </span>
+                    <div
+                      className={styles.colorPreview}
+                      style={{
+                        backgroundColor: mainColor
+                      }}
+                    />
+                    <input
+                      id="main-color-input"
+                      type="color"
+                      value={mainColor}
+                      onChange={updateMainColor}
+                    />
+                  </label>
+                </div>
+              </section>
+
+              <ControlsBlock
+                steps={steps}
+                onChange={(shades) => {
+                  setLightShades(shades.shades);
+                  setLightShadeParams(shades.params);
+
+                  const params = new URLSearchParams(window.location.search);
+                  params.set("lsb", shades.params.shadeBrightness.toString());
+                  params.set("lss", shades.params.shadeSaturation.toString());
+                  params.set("lst", shades.params.shadeTemperature.toString());
+
+                  setURLParams(params);
+                }}
+                shadeParams={lightShadeParams}
+                mainColor={mainColor}
+                direction="lighten"
+              />
+            </section>
           </section>
-        </section>
 
-        <Sidebar
-          steps={steps}
-          onStepsChange={() => {
-            const params = new URLSearchParams(window.location.search);
-            params.set("steps", steps.toString());
+          <Sidebar
+            steps={steps}
+            onStepsChange={() => {
+              const params = new URLSearchParams(window.location.search);
+              params.set("steps", steps.toString());
 
-            setURLParams(params);
-          }}
-          onPlusClick={() => {
-            setSteps(steps + 1);
-          }}
-          onMinusClick={() => {
-            if (steps > 1) {
-              setSteps(steps - 1);
-            }
-          }}
-        />
-      </main>
+              setURLParams(params);
+            }}
+            onPlusClick={() => {
+              setSteps(steps + 1);
+            }}
+            onMinusClick={() => {
+              if (steps > 1) {
+                setSteps(steps - 1);
+              }
+            }}
+          />
+        </main>
+      )}
     </>
   );
 }
