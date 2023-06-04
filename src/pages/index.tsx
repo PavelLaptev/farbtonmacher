@@ -16,10 +16,13 @@ import styles from "./styles.module.scss";
 const HeadContent = () => {
   const ogDescription =
     "Farbtonmacher is a tool that helps you to generate color shades based on your main color.";
+  const ogTitle = "Farbtonmacher | Shades generator";
+  const ogImage =
+    "https://cdn.glitch.global/9d0eadb1-3c61-4e5d-89d6-a2995cbc29b9/og-image.png";
 
   return (
     <Head>
-      <title>Farbtonmacher | Shades generator</title>
+      <title>{ogTitle}</title>
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <link rel="icon" href="./favicon.ico" sizes="any" />
       <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
@@ -28,12 +31,20 @@ const HeadContent = () => {
       <meta name="Farbtonmacher" content={ogDescription} />
 
       <meta name="theme-color" content="#4a4a4a"></meta>
-      <meta property="og:title" content="Farbtonmacher | Shades generator" />
+      <meta property="og:title" content={ogTitle} />
       <meta property="og:description" content={ogDescription} />
+      <meta property="og:image" content={ogImage} />
+
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta property="twitter:domain" content="pavellaptev.github.io" />
       <meta
-        property="og:image"
-        content="https://cdn.glitch.global/9d0eadb1-3c61-4e5d-89d6-a2995cbc29b9/og-image.png"
+        property="twitter:url"
+        content="https://pavellaptev.github.io/farbtonmacher/"
       />
+      <meta name="twitter:title" content={ogTitle} />
+      <meta name="twitter:description" content={ogDescription} />
+      <meta name="twitter:image" content={ogImage} />
+
       <script async src="https://cdn.splitbee.io/sb.js"></script>
     </Head>
   );
