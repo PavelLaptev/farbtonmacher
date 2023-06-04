@@ -1,5 +1,7 @@
 # Farbtonemacher
 
+![preview](./og-image.png)
+
 Farbtonemacher is a tool that helps you to generate color shades based on your main color. You can adjust the brightness, saturation and temperature of the shades. You can also share your color configuration with others by copying the URL.
 
-GitHub Pages: https://pavellaptev.github.io/farbtonmacher
+## GitHub Pages: https://pavellaptev.github.io/farbtonmacher

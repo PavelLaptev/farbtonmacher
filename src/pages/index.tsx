@@ -126,7 +126,7 @@ export default function Home() {
         />
         <meta
           property="og:image"
-          content={`http://localhost:3000/api/og?color=${mainColor}`}
+          content="https://raw.githubusercontent.com/PavelLaptev/farbtonmacher/main/og-image.png"
         />
       </Head>
 
