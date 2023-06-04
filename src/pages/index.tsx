@@ -53,10 +53,9 @@ export default function Home() {
   };
 
   const setURLParams = (params: URLSearchParams) => {
-    router.push({
-      pathname: "/",
-      query: params.toString()
-    } as any);
+    const urlConfig = `${window.location.pathname}?${params.toString()}`;
+
+    window.history.replaceState({}, "", urlConfig);
   };
 
   useEffect(() => {
