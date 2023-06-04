@@ -129,17 +129,6 @@ export default function Home() {
     }
   }, []);
 
-  // if (mainColor === "") {
-  //   return (
-  //     <>
-  //       <HeadContent />
-  //       <div className={styles.loadingWrapper}>
-  //         <LoadSpinner />
-  //       </div>
-  //     </>
-  //   );
-  // }
-
   return (
     <>
       <HeadContent />
