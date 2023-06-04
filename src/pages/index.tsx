@@ -112,9 +112,16 @@ export default function Home() {
           configuration with others by copying the URL."
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="icon" href="/farbtonmacher/favicon.ico" sizes="any" />
+        <link
+          rel="icon"
+          href="/farbtonmacher/favicon.svg"
+          type="image/svg+xml"
+        />
+        <link
+          rel="apple-touch-icon"
+          href="/farbtonmacher/apple-touch-icon.png"
+        />
         <meta name="theme-color" content="#4a4a4a"></meta>
         <meta property="og:title" content="Farbtonemacher | Shades generator" />
         <meta
