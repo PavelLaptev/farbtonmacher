@@ -17,7 +17,7 @@ import styles from "./styles.module.scss";
 //   "Farbtonmacher is a tool that helps you to generate color shades based on your main color.";
 
 export default function Home() {
-  const router = useRouter();
+  // const router = useRouter();
 
   const defaultSteps = 4;
   const defaultMainColor = "#36EAA9";
@@ -75,10 +75,10 @@ export default function Home() {
       params.set("lss", "0");
       params.set("lst", "0");
 
-      router.push({
-        pathname: "/",
-        query: params.toString()
-      } as any);
+      // router.push({
+      //   pathname: "/",
+      //   query: params.toString()
+      // } as any);
     } else {
       setMainColor(colorParam);
       setSteps(parseFloat(params.get("steps") || defaultSteps.toString()));
