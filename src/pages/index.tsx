@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import Head from "next/head";
 import { generateShadeNames } from "@/utils";
 
@@ -53,9 +53,10 @@ export default function Home() {
   };
 
   const setURLParams = (params: URLSearchParams) => {
-    const urlConfig = `${window.location.pathname}?${params.toString()}`;
-
-    window.history.replaceState({}, "", urlConfig);
+    router.push({
+      pathname: "/",
+      query: params.toString()
+    } as any);
   };
 
   useEffect(() => {
