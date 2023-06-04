@@ -119,7 +119,7 @@ export default function Home() {
         <meta property="og:description" content={ogDescription} />
         <meta
           property="og:image"
-          content="https://cdn.glitch.global/9d0eadb1-3c61-4e5d-89d6-a2995cbc29b9/og-image.png"
+          content="https://raw.githubusercontent.com/PavelLaptev/farbtonmacher/main/og-image.jpeg"
         />
         <script async src="https://cdn.splitbee.io/sb.js"></script>
       </Head>
