@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import Head from "next/head";
 import { generateShadeNames } from "@/utils";
 
@@ -13,11 +13,11 @@ import {
 
 import styles from "./styles.module.scss";
 
-// const ogDescription =
-//   "Farbtonmacher is a tool that helps you to generate color shades based on your main color.";
+const ogDescription =
+  "Farbtonmacher is a tool that helps you to generate color shades based on your main color.";
 
 export default function Home() {
-  // const router = useRouter();
+  const router = useRouter();
 
   const defaultSteps = 4;
   const defaultMainColor = "#36EAA9";
@@ -75,10 +75,10 @@ export default function Home() {
       params.set("lss", "0");
       params.set("lst", "0");
 
-      // router.push({
-      //   pathname: "/",
-      //   query: params.toString()
-      // } as any);
+      router.push({
+        pathname: "/",
+        query: params.toString()
+      } as any);
     } else {
       setMainColor(colorParam);
       setSteps(parseFloat(params.get("steps") || defaultSteps.toString()));
@@ -111,50 +111,16 @@ export default function Home() {
         <link rel="icon" href="./favicon.ico" sizes="any" />
         <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+        <meta name="description" content={ogDescription} />
+        <meta name="Farbtonmacher" content={ogDescription} />
 
-        {/* GENERAL */}
-
-        <title>Farbtonmacher | Shades generator</title>
-        <meta
-          name="description"
-          content="Farbtonmacher is a tool that helps you to generate color shades based on your main color."
-        />
-
-        {/* FACEBOOK */}
-
-        <meta
-          property="og:url"
-          content="https://pavellaptev.github.io/farbtonmacher/"
-        />
-        <meta property="og:type" content="website" />
+        <meta name="theme-color" content="#4a4a4a"></meta>
         <meta property="og:title" content="Farbtonmacher | Shades generator" />
-        <meta
-          property="og:description"
-          content="Farbtonmacher is a tool that helps you to generate color shades based on your main color."
-        />
+        <meta property="og:description" content={ogDescription} />
         <meta
           property="og:image"
           content="https://cdn.glitch.global/9d0eadb1-3c61-4e5d-89d6-a2995cbc29b9/og-image.png"
         />
-
-        {/* TWITTER */}
-
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta property="twitter:domain" content="pavellaptev.github.io" />
-        <meta
-          property="twitter:url"
-          content="https://pavellaptev.github.io/farbtonmacher/"
-        />
-        <meta name="twitter:title" content="Farbtonmacher | Shades generator" />
-        <meta
-          name="twitter:description"
-          content="Farbtonmacher is a tool that helps you to generate color shades based on your main color."
-        />
-        <meta
-          name="twitter:image"
-          content="https://cdn.glitch.global/9d0eadb1-3c61-4e5d-89d6-a2995cbc29b9/og-image.png"
-        />
-
         <script async src="https://cdn.splitbee.io/sb.js"></script>
       </Head>
 
